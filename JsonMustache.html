@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>JSON a Mustache</title>
+</head>
+<body>
+<h1>Výsledné hodnotenie žiakov</h1>
+
+<script>document.write('<script src="js/mustache.min.js"><\/script>')</script>
+
+<script type="text/javascript">
+	var objJson = JSON.parse('{"ziaci":[{"meno":"Jozko","priezvisko":"Mrkva","hodnotenie":[{"predme'+
+	't":"matematika","znamka":1},{"predmet":"slovenèina","znamka":3},{"pre'+
+	'dmet":"angliètina","znamka":2}]},'+
+	'{"meno":"Ferko","priezvisko":"Kapusta","hodnotenie":[{"predmet":"mate'+
+	'matika","znamka":4},{"predmet":"slovenèina","znamka":1},{"predmet":"a'+
+	'ngliètina","znamka":2}]},'+
+	'{"meno":"Janka","priezvisko":"Hrušková","hodnotenie":[{"predmet":"mat'+
+	'ematika","znamka":1},{"predmet":"slovenèina","znamka":1},{"predmet":"'+
+	'angliètina","znamka":1}]},'+
+	'{"meno":"Pavol","priezvisko":"Paprika"},{"meno":"Petra","priezvisko":'+
+	'"Višòová","hodnotenie":[{"predmet":"matematika","znamka":3},{"predmet'+
+	'":"slovenèina","znamka":1},{"predmet":"angliètina","znamka":1}]}]}');
+	
+	for(var i = 0, len = objJson.ziaci.length; i < len; i++) {
+	if (objJson.ziaci[i].hodnotenie != null) {
+			objJson.ziaci[i].hodnotenie.sort(function(a, b) {
+				return a.znamka - b.znamka;
+			});
+		}
+	}
+
+	var tmpl = "{{#ziaci}} <p> <h2> {{meno}} {{priezvisko}} </h2> <br>  Známky: {{^hodnotenie}} <ul><li> nemá </li></ul> {{/hodnotenie}} <ul> {{#hodnotenie}} <li> {{#predmet}} {{.}} {{/predmet}} : {{#znamka}} {{.}} {{/znamka}} </li> {{/hodnotenie}} </ul> <hr> </p> {{/ziaci}}";
+
+	document.write(Mustache.render(tmpl, objJson));
+</script>
+</body>
+</html>
