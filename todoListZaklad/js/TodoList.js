@@ -6,8 +6,6 @@ if(localStorage.toDoList) {
 
 var taskTemplate =$("#tmplTask").html();
 
-console.log(taskTemplate);
-
 function addTaskToHtml(task) {
 	if(task) {
 		var $element = $(Mustache.render(taskTemplate, task));
@@ -67,6 +65,23 @@ $("#btRemCmpl").click(function() {
 			}
 		);
 		localStorage.toDoList = JSON.stringify(tasks);
+	}
+);
+
+$("#inNewTask").focus(
+	    function(){
+	        $(this).val("");
+	    });
+
+$('#inNewTask').keypress(function(e){
+	if(e.keyCode==13)
+		$('#btAddTask').click();
+});
+
+
+$element.keypress(function() {
+		if(e.keyCode==8)
+			$("#btRemCmpl").click();
 	}
 );
 
