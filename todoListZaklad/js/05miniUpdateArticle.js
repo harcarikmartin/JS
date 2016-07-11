@@ -1,4 +1,5 @@
 var $frm = $("#frmArt");
+var data = {};
 
 //Pridanie funkcionality pre kliknutie na tlacidlo "Ulož článok"
 $frm.submit(function(event){  //tu potrebujem aj objekt s udalosťou, aby som
@@ -32,11 +33,12 @@ function skontrolujAOdosli(){
         return;
     }
     
-    data.content = "<div>" + data.content + "</div>"
-    switch(data.nalada) {
-    	case "0": data.content += "<p>" + Mam sa velmi zle. + "</p>"; break;
-    	case "1": data.content += "<p>" + Mam sa zle. + "</p>"; break;
-    	case "2": data.content += "<p>" + Mam sa dobre. + "</p>"; break;
+    data.content = "<div>" + data.content + "</div>";
+    
+    switch (data.nalada) {
+    	case "0": data.content += '<p> Mam sa velmi zle. </p>'; break;
+    	case "1": data.content += '<p> Mam sa zle. </p>'; break;
+    	case "2": data.content += '<p> Mam sa dobre. </p>';
     }
     
     delete data.nalada;
